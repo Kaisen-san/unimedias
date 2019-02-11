@@ -3,7 +3,7 @@
 var system = require('system');
 var page = require('webpage').create();
 var loginUrl = 'https://www2.maua.br/mauanet.2.0';
-var boletimUrl = 'https://www2.maua.br/mauanet.2.0/boletim-escolar/index/c/1';
+var boletimUrl = 'https://www2.maua.br/mauanet.2.0/boletim-escolar';
 
 if (system.args.length < 3) {
 	console.log(JSON.stringify({'error': 'Please inform user and password!'}));
