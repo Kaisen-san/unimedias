@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UniMédias - Matérias</title>
+</head>
+<body>
+    <% for (let i = 0; i < Object.keys(subjects).length; i++) { %>
+        <h1><%= Object.keys(subjects)[i] %></h1>
+        <% for (let j = 1; j <= 16; j++) { %>
+            <% if (subjects[Object.keys(subjects)[i]][`T${j}`]) { %>
+                <p><%= `T${j}: ${subjects[Object.keys(subjects)[i]][`T${j}`]}` %></p>
+            <% } %>
+        <% } %>
+    <% } %>
+</body>
+</html>
