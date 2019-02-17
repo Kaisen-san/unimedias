@@ -12,11 +12,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-let subjects = [];
+let userSubjects = {};
 
 app.get('/', (req, res) => res.render('pages/index'));
 
-app.get('/login', (req,res) => res.render('pages/main', { 'subjects': subjects }));
+app.get('/subjects', (req, res) => {
+	if (Object.entries(userSubjects).length === 0) {
+		res.redirect('/');
+		return;
+	}
+	
+	res.render('pages/main', { 'subjects': userSubjects });
+});
 
 app.post('/login', (req, res) => {
 	let childArgs = [
@@ -34,15 +41,16 @@ app.post('/login', (req, res) => {
 				return;
 			}
 			
-			let output = JSON.parse(stdout);
+			let { error, subjects } = JSON.parse(stdout);
 			
-			if (output.error) {
-				console.log(output.error);
+			if (error) {
+				console.log(error);
+				res.redirect('/');
 				return;
 			}
 			
-			subjects = output.data;
-			res.redirect('/login');
+			userSubjects = subjects;
+			res.redirect('/subjects');
 		});
 });
 
